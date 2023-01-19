@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adshield-proxy
+  labels:
+    app: adshield-proxy
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: adshield-proxy
+  template:
+    metadata:
+      labels:
+        app: adshield-proxy
+    spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{ toYaml .Values.image.imagePullSecrets | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: adshield-proxy
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: {{ .Values.proxy.resources.requests.memory | default "1Gi" }}
+            cpu: {{ .Values.proxy.resources.requests.cpu | default "500m" }}
+          limits:
+            memory: {{ .Values.proxy.resources.limits.memory | default "2Gi" }}
+            cpu: {{ .Values.proxy.resources.limits.cpu | default "1000m" }}
+        readinessProbe:
+          httpGet:
+            path: /ad-shield/health-check
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 2
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /ad-shield/health-check
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 3
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 20"]
+        env:
+        - name: TARGETS
+          value: {{ join "," .Values.proxy.targets }}

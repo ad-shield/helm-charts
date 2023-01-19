@@ -1,0 +1,16 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adshield-proxy-ingress
+{{- if .Values.server.ingress.annotations }}
+  annotations:
+{{ toYaml .Values.server.ingress.annotations | indent 4 }}
+{{- end }}
+spec:
+  defaultBackend:
+    service:
+      name: adshield-proxy-svc
+      port:
+        number: 80
+{{- end -}}

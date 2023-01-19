@@ -1,0 +1,10 @@
+apiVersion: v2
+name: adshield-proxy
+appVersion: v0.0.1
+version: 0.0.1
+description: Ad-Shield Proxy
+home: https://www.ad-shield.io
+maintainers:
+  - name: Ad-Shield
+    email: dev@ad-shield.io
+type: application
