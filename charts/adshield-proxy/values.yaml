@@ -9,7 +9,7 @@ proxy:
   targets:
     - https://1.your.origin
     - https://2.your.origin
-  resource: 
+  resources: 
     requests: 
       memory: "128Mi"
       cpu: "80m"
