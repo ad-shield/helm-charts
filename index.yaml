@@ -3,6 +3,20 @@ entries:
   adshield-proxy:
   - apiVersion: v2
     appVersion: v0.0.1
+    created: "2023-01-19T23:45:57.307395936Z"
+    description: Ad-Shield Proxy
+    digest: 8ad5f3d8112c1a9b6a9b896636b099137e10eeb7624783763b65561df230f08e
+    home: https://www.ad-shield.io
+    maintainers:
+    - email: dev@ad-shield.io
+      name: Ad-Shield
+    name: adshield-proxy
+    type: application
+    urls:
+    - https://github.com/ad-shield/helm-charts/releases/download/adshield-proxy-0.0.2/adshield-proxy-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v0.0.1
     created: "2023-01-19T22:47:16.051159547Z"
     description: Ad-Shield Proxy
     digest: 8ccbe9a9aa106dc1ebe81db831d17bd231b52c013e92357ff976f68bd5883fde
