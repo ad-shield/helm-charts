@@ -1,0 +1,4 @@
+proxy:
+  targets:
+    - https://1.your.origin
+    - https://2.your.origin 
